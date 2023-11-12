@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.4
+Created-By: 0.0.1-PreAlpha (emrecellebi)
+Class-Path: 
+Main-Class: com.emrecellebi.Console
+
