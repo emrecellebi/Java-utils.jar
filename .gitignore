@@ -1,7 +1,7 @@
-examples
+examples\*
 lib\trove4j-3.0.3.jar
-bin
+bin\*
 src\resources
 src\compiler.bat
 src\run.bat
-src\com\emrecellebi\_other
+src\com\emrecellebi\_other\*
