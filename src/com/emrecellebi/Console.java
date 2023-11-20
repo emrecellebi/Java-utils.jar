@@ -21,12 +21,12 @@ import com.emrecellebi.ThreeState;					/// Tamamlandı
 
 import com.emrecellebi.util.ArrayUtilRt;			/// Tamamlandı
 import com.emrecellebi.util.CharArrayUtil;			/// Tamamlandı
-import com.emrecellebi.util.Comparing;				/// Tamamlandı
+import com.emrecellebi.util.Comparing;				/// Tamamlandı #
 import com.emrecellebi.util.FileUtilRt;				/// Tamamlandı
 import com.emrecellebi.util.PathUtilRt;				/// Tamamlandı
-import com.emrecellebi.util.Strings;				/// Tamamlandı
+import com.emrecellebi.util.Strings;				/// Tamamlandı #
 import com.emrecellebi.util.StringUtil;				/// Devam Ediyor...
-import com.emrecellebi.util.StringUtilRt;			/// Tamamlandı
+import com.emrecellebi.util.StringUtilRt;			/// Tamamlandı #
 import com.emrecellebi.util.SystemInfo;				/// Devam Ediyor...
 import com.emrecellebi.util.SystemInfoRt;			/// Tamamlandı
 import com.emrecellebi.util.URLUtil;				/// Devam Ediyor...
@@ -39,7 +39,7 @@ import com.emrecellebi.text.ImmutableCharSequence;		/// Tamamlandı
 import com.emrecellebi.text.ImmutableText;				/// Tamamlandı
 import com.emrecellebi.text.MergingCharSequence;		/// Tamamlandı
 import com.emrecellebi.text.Pair;						/// Tamamlandı
-import com.emrecellebi.text.Pluralizer;					/// Tamamlandı
+import com.emrecellebi.text.Pluralizer;					/// Tamamlandı #
 import com.emrecellebi.text.TextRange;					/// Tamamlandı
 import com.emrecellebi.text.UnsyncCharArrayReader;		/// Tamamlandı
 
@@ -61,10 +61,19 @@ public class Console
 	{
 		String uri = "http://78.135.80.229:32764/orders/n11/update?companyCode=Fr-5500175&number=205818585916";
 		
+		/// Bir URL de (mailto: :// www.) geçiyor ise true döner.
 		System.out.println("URLUtil.canContainUrl(String): boolean -> " + URLUtil.canContainUrl(uri));
+		
+		/// Bir URL de (://) geçiyor ise true döner.
 		System.out.println("URLUtil.containsScheme(String): boolean -> " + URLUtil.containsScheme(uri));
+		
+		/// Bir URL de %20 gibi değerleri decode eder.
 		System.out.println("URLUtil.decode(String): String -> " + URLUtil.decode(uri));
+		
+		/// Bir URL encode eder.
 		System.out.println("URLUtil.encodeURIComponent(String): String -> " + URLUtil.encodeURIComponent(uri));
+		
+		/// Bir html veya her hangi data bilgisindeki URL bulur ve TextRange olarak geri döner.
 		System.out.println("URLUtil.findUrl(CharSequence, int, int): TextRange -> " + URLUtil.findUrl(uri, 0, uri.length()));
 		
 		byte[] bytes = new byte[0];
@@ -74,12 +83,12 @@ public class Console
 			System.out.print(bytes[i]);
 		System.out.println();
 		
-		URL url = null;
-		try{url = URLUtil.getJarEntryURL(new File("../utils.jar"), "com/emrecellebi/util/URLUtil");}catch(Exception e){}
-		System.out.println("URLUtil.getJarEntryURL(File, String): URL -> " + url);
+		// URL url = null;
+		// try{url = URLUtil.getJarEntryURL(new File("../utils.jar"), "com/emrecellebi/util/URLUtil");}catch(Exception e){}
+		// System.out.println("URLUtil.getJarEntryURL(File, String): URL -> " + url);
 		
-		System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri("data:" + uri));
-		System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri(uri));
+		// System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri("data:" + uri));
+		// System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri(uri));
 		// System.out.println("URLUtil.openJarStream(URL): InputStream -> " + URLUtil.openJarStream());
 		
 		
@@ -87,23 +96,14 @@ public class Console
 		
 		
 		
-		/**
-			getShortName(Class<?>): String --> Verilen bir sınıfdan kısa isim döner.
-		**/
-		System.out.println("StringUtilRt.getShortName(Class<?>): String -> " + StringUtilRt.getShortName(String.class));
 		
-		/**
-			getShortName(String): String --> Verilen bir stringden kısa isim döner. Default olarak nokta ile ayrılır.
-		**/
-		System.out.println("StringUtilRt.getShortName(String): String -> " + StringUtilRt.getShortName("T.C"));
 		
-		/**
-			getShortName(String, char): String --> Verilen bir stringden belirlene ayraç ile bölünüp kıs bir isim döner.
-		**/
-		System.out.println("StringUtilRt.getShortName(String, char): String -> " + StringUtilRt.getShortName("Emre Celebi", ' '));
-		
+
 		
 		// Logger log = Logger.getInstance(Console.class);
+		
+		
+		
 		
 		
 		
