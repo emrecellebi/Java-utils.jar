@@ -1,6 +1,7 @@
 package com.emrecellebi;
 
 import java.util.*;
+import java.util.zip.*;
 import java.net.*;
 import java.io.*;
 import java.nio.*;
@@ -9,6 +10,7 @@ import java.nio.charset.*;
 import com.emrecellebi.logging.Logger;				/// Devam Ediyor...
 import com.emrecellebi.logging.LoggerRt;			/// Tamamlandı
 
+import com.emrecellebi.IArrayFactory;				/// Tamamlandı
 import com.emrecellebi.ICharArrayExternalizable;	/// Tamamlandı
 import com.emrecellebi.ICharSequenceBackedByArray;	/// Tamamlandı
 import com.emrecellebi.ICharSequenceWithStringHash;	/// Tamamlandı
@@ -29,7 +31,8 @@ import com.emrecellebi.util.StringUtil;				/// Devam Ediyor...
 import com.emrecellebi.util.StringUtilRt;			/// Tamamlandı #
 import com.emrecellebi.util.SystemInfo;				/// Devam Ediyor...
 import com.emrecellebi.util.SystemInfoRt;			/// Tamamlandı
-import com.emrecellebi.util.URLUtil;				/// Devam Ediyor...
+import com.emrecellebi.util.SystemProperties;		/// Tamamlandı
+import com.emrecellebi.util.URLUtil;				/// Tamamlandı
 
 import com.emrecellebi.text.ByteArrayCharSequence;		/// Tamamlandı
 import com.emrecellebi.text.CharArrayCharSequence;		/// Tamamlandı
@@ -59,37 +62,17 @@ public class Console
 	
 	public static void main(String[] args)
 	{
-		String uri = "http://78.135.80.229:32764/orders/n11/update?companyCode=Fr-5500175&number=205818585916";
 		
-		/// Bir URL de (mailto: :// www.) geçiyor ise true döner.
-		System.out.println("URLUtil.canContainUrl(String): boolean -> " + URLUtil.canContainUrl(uri));
 		
-		/// Bir URL de (://) geçiyor ise true döner.
-		System.out.println("URLUtil.containsScheme(String): boolean -> " + URLUtil.containsScheme(uri));
 		
-		/// Bir URL de %20 gibi değerleri decode eder.
-		System.out.println("URLUtil.decode(String): String -> " + URLUtil.decode(uri));
 		
-		/// Bir URL encode eder.
-		System.out.println("URLUtil.encodeURIComponent(String): String -> " + URLUtil.encodeURIComponent(uri));
 		
-		/// Bir html veya her hangi data bilgisindeki URL bulur ve TextRange olarak geri döner.
-		System.out.println("URLUtil.findUrl(CharSequence, int, int): TextRange -> " + URLUtil.findUrl(uri, 0, uri.length()));
 		
-		byte[] bytes = new byte[0];
-		System.out.print("URLUtil.getBytesFromDataUri(String): byte[] -> ");
-		// bytes = URLUtil.getBytesFromDataUri(url);
-		for(int i = 0; i < bytes.length; i++)
-			System.out.print(bytes[i]);
-		System.out.println();
 		
-		// URL url = null;
-		// try{url = URLUtil.getJarEntryURL(new File("../utils.jar"), "com/emrecellebi/util/URLUtil");}catch(Exception e){}
-		// System.out.println("URLUtil.getJarEntryURL(File, String): URL -> " + url);
 		
-		// System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri("data:" + uri));
-		// System.out.println("URLUtil.isDataUri(String): boolean -> " + URLUtil.isDataUri(uri));
-		// System.out.println("URLUtil.openJarStream(URL): InputStream -> " + URLUtil.openJarStream());
+		
+		
+		
 		
 		
 		// try{Thread.sleep(10000);}catch(Exception e){}
