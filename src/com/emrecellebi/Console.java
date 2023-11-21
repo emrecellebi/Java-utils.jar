@@ -21,6 +21,7 @@ import com.emrecellebi.ISegment;					/// Tamamlandı
 import com.emrecellebi.NullAppendable;				/// Tamamlandı
 import com.emrecellebi.ThreeState;					/// Tamamlandı
 
+import com.emrecellebi.util.ArrayUtil;				/// Devam Ediyor...
 import com.emrecellebi.util.ArrayUtilRt;			/// Tamamlandı
 import com.emrecellebi.util.CharArrayUtil;			/// Tamamlandı
 import com.emrecellebi.util.Comparing;				/// Tamamlandı #
@@ -47,29 +48,65 @@ import com.emrecellebi.text.TextRange;					/// Tamamlandı
 import com.emrecellebi.text.UnsyncCharArrayReader;		/// Tamamlandı
 
 /** Kişisel Kendi Sınıflarım **/
+import com.emrecellebi.ObjectArray;
 import com.emrecellebi.util.ObjectFactory;
 
 public class Console
 {
-	public static <T> void instance(T seq)
-	{
-		if(seq instanceof String) System.out.println("String");
-		if(seq instanceof StringBuilder) System.out.println("StringBuilder");
-		if(seq instanceof StringBuffer) System.out.println("StringBuffer");
-		if(seq instanceof CharBuffer) System.out.println("CharBuffer");
-		if(seq instanceof CharSequence) System.out.println("CharSequence");
-	}
-	
 	public static void main(String[] args)
 	{
+		/**
+			IArrayFactory interface deki create methodu kullanılarak bir array oluşturlup src içindekileri alıp ve eklemek istemilen 
+			değeri ekler. Return olarak geri döner.
+		**/
+		Object[] src = {"Hello World!", 25, 3.14f, 25.25, false, true, new String("Object String")};
+		Object[] newObj = ArrayUtil.append(src, 25, new ObjectArray());
+		System.out.print("ArrayUtil.append(Object<T>[], Object<T>, IArrayFactory<T>): Object<T>[] -> ");
+		for(int i = 0; i < newObj.length; i++)
+			System.out.print(newObj[i] + ",");
+		System.out.println();
+		
+		/**
+			Bir class tipi kulanılarak array oluşturlup src içindekileri alıp ve eklemek istenilen 
+			değeri ekler. Return olarak geri döner.
+		**/
+		Object[] newObj2 = ArrayUtil.append(src, 125.5f, Object.class);
+		System.out.print("ArrayUtil.append(Object<T>[], Object<T>, Class<T>): Object<T>[] -> ");
+		for(int i = 0; i < newObj2.length; i++)
+			System.out.print(newObj2[i] + ",");
+		System.out.println();
+		
+		/**
+			Bir boolean primitivs tipinde array ekleme yapar.
+			boolean, int, float, double, char, short, byte, long
+		**/
+		boolean[] blns = ArrayUtil.append(new boolean[0], true);
+		System.out.print("ArrayUtil.append(boolean[], boolean): boolean[] -> ");
+		for(int i = 0; i < blns.length; i++)
+			System.out.print(blns[i]);
+		System.out.println();
+		
+		/**
+			
+		**/
+		System.out.println("ArrayUtil.averageAmongMedians(int[], int): long -> " + ArrayUtil.averageAmongMedians(new int[]{22, 25, 35, 45, 55, 60, 80}, 3));
+		System.out.println("ArrayUtil.averageAmongMedians(long[], int): long -> " + ArrayUtil.averageAmongMedians(new long[]{22, 25, 35, 45, 55, 60, 80}, 3));
+		
+		// contains kaldık
 		
 		
 		
 		
+		/**
+			Her hangi bir class tipinde verile boyut kadar bir array oluşturur.
+		**/
+		System.out.println("ArrayUtil.newArray(Class<T>, int): Object<T>[] -> " + ArrayUtil.newArray(Object.class, 2).length);
 		
-		
-		
-		
+		/**
+			Daha önce oluşturulmuş olan bir primitivs arrayi yeniden boyutlandırır.
+			boolean, int, float, double, char, short, byte, long
+		**/
+		System.out.println("ArrayUtil.realloc(boolean[], int): boolean[] -> " + ArrayUtil.realloc(new boolean[0], 5).length);
 		
 		
 		
