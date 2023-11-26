@@ -44,23 +44,23 @@ public final class Pluralizer
 	private final List<Pair<Pattern, String>> singularRules = new ArrayList<>();
 	private final Set<String> uncountables = new HashSet();
 	
-	protected void addIrregularRule(String single, String plural)
+	public void addIrregularRule(String single, String plural)
 	{
 		this.irregularSingles.put(single, plural);
 		this.irregularPlurals.put(plural, single);
 	}
 	
-	protected void addPluralRule(String rule, String replacement)
+	public void addPluralRule(String rule, String replacement)
 	{
 		this.pluralRules.add(Pair.create(sanitizeRule(rule), replacement));
 	}
 
-	protected void addSingularRule(String rule, String replacement)
+	public void addSingularRule(String rule, String replacement)
 	{
 		this.singularRules.add(Pair.create(sanitizeRule(rule), replacement));
 	}
 
-	protected void addUncountableRule(String word)
+	public void addUncountableRule(String word)
 	{
 		if(!word.startsWith("/"))
 			this.uncountables.add(word);
@@ -80,6 +80,11 @@ public final class Pluralizer
 	{
 		String pluralized = (count == 1) ? singular(word) : plural(word);
 		return (inclusive ? (count + " ") : "") + Strings.notNullize(pluralized, word);
+	}
+	
+	public String singular(String word)
+	{
+		return restoreCase(word, replaceWord(word, this.irregularPlurals, this.irregularSingles, this.singularRules));
 	}
 	
 	private String replaceWord(String word, Map<String, String> replaceMap, Map<String, String> keepMap, List<? extends Pair<Pattern, String>> rules)
@@ -137,10 +142,5 @@ public final class Pluralizer
 			if(matcher.find()) return matcher.replaceFirst((String)rule.second); 
 		}
 		return null;
-	}
-	
-	public String singular(String word)
-	{
-		return restoreCase(word, replaceWord(word, this.irregularPlurals, this.irregularSingles, this.singularRules));
 	}
 }

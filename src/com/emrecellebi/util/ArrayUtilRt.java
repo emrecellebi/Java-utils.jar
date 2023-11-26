@@ -12,14 +12,14 @@ public final class ArrayUtilRt
 	
 	public static <T> int indexOf(T[] src, T obj, int start, int end)
 	{
-		if (obj == null)
+		if(obj == null)
 		{
 			for(int i = start; i < end; i++)
 				if(src[i] == null) return i;
 		}
 		else
 		{
-			for (int i = start; i < end; i++)
+			for(int i = start; i < end; i++)
 				if(obj.equals(src[i])) return i; 
 		}
 		return -1;
