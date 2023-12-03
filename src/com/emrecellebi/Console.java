@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 // import java.util.zip.*;
 
+import com.emrecellebi.openapi.IDisposable;			/// Tamamlandı
+
 import com.emrecellebi.openapi.diagnostic.IControlFlowException;	/// Tamamlandı
-import com.emrecellebi.openapi.diagnostic.Logger;	/// Devam Ediyor...
-import com.emrecellebi.openapi.diagnostic.LoggerRt;	/// Tamamlandı
+import com.emrecellebi.openapi.diagnostic.Logger;					/// Devam Ediyor...
+import com.emrecellebi.openapi.diagnostic.LoggerRt;					/// Tamamlandı
 
 import com.emrecellebi.openapi.util.Comparing;		/// Tamamlandı #
+import com.emrecellebi.openapi.util.Conditions;		/// Devam Ediyor...
+import com.emrecellebi.openapi.util.ICondition;		/// Tamamlandı
 import com.emrecellebi.openapi.util.IFactory;		/// Tamamlandı
+import com.emrecellebi.openapi.util.IGetter;		/// Tamamlandı
 import com.emrecellebi.openapi.util.INotNullFactory;/// Tamamlandı
 import com.emrecellebi.openapi.util.ISegment;		/// Tamamlandı
 import com.emrecellebi.openapi.util.Pair;			/// Tamamlandı #
@@ -31,6 +36,8 @@ import com.emrecellebi.openapi.util.text.Strings;						/// Tamamlandı #
 import com.emrecellebi.openapi.util.text.StringUtil;					/// Devam Ediyor...
 import com.emrecellebi.openapi.util.text.StringUtilRt;					/// Tamamlandı #
 
+import com.emrecellebi.reference.SoftReference;		/// Tamamlandı
+
 import com.emrecellebi.util.ArrayUtil;				/// Tamamlandı
 import com.emrecellebi.util.ArrayUtilRt;			/// Tamamlandı
 import com.emrecellebi.util.IArrayFactory;			/// Tamamlandı
@@ -38,7 +45,7 @@ import com.emrecellebi.util.IConsumer;				/// Tamamlandı
 import com.emrecellebi.util.IFunction;				/// Tamamlandı #
 import com.emrecellebi.util.INullableFunction;		/// Tamamlandı #
 import com.emrecellebi.util.IProcessor;				/// Tamamlandı
-import com.emrecellebi.util.ObjectUtils;			/// Tamamlandı			--> Çok Saçma Method var.
+import com.emrecellebi.util.ObjectUtils;			/// Tamamlandı			--> Çok Saçma Method var
 import com.emrecellebi.util.PathUtilRt;				/// Tamamlandı
 import com.emrecellebi.util.SystemProperties;		/// Tamamlandı
 import com.emrecellebi.util.ThreeState;				/// Tamamlandı
@@ -68,14 +75,100 @@ public class Console
 {
 	public static void main(String[] args)
 	{
+		System.out.println("alwaysFalse: " + Conditions.alwaysFalse());
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("alwaysTrue: " + Conditions.alwaysTrue());
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("and: " + Conditions.and((ICondition<String>)str -> str.length() < 5, (ICondition<String>)str -> str.startsWith("Hello")).value("Hello World!"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("and2: " + Conditions.and2((ICondition<String>)str -> str.length() > 5, (ICondition<String>)str -> str.startsWith("Hello")).value("Hello World!"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("assignableTo: " + Conditions.assignableTo(Object.class).value(String.class));
+		System.out.println("assignableTo: " + Conditions.assignableTo(String.class).value(Integer.class));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("cached: " + Conditions.cached((ICondition<String>)str -> str.length() > 5).value("Hello World!"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("compose: " + Conditions.compose((IFunction<Integer, String>)num -> String.valueOf(num * 2), (ICondition<String>)str -> str.length() > 5).value(3));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("constant: " + Conditions.constant(true));
+		System.out.println("constant: " + Conditions.constant(false));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("equalTo: " + Conditions.equalTo("Hi").value("Hi"));
+		System.out.println("equalTo: " + Conditions.equalTo("Hi").value("HI"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("instanceOf: " + Conditions.instanceOf(String.class).value("Hi"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("instanceOf: " + Conditions.instanceOf(Integer.class, Long.class, String.class).value("Hi"));
+		System.out.println("*********************************************************************************************");
+		
+		System.out.println("is: " + Conditions.is("Hi").value("Hi"));
+		System.out.println("is: " + Conditions.is("Hi").value("HI"));
+		System.out.println("*********************************************************************************************");
 		
 		
-		
+		// not
 		
 /**
+	------------------> public static <T> ICondition<T> alwaysFalse() <------------------
+	Her zaman False şartını döner.
 	
+	*********************************************************************************************
 	
+	------------------> public static <T> ICondition<T> alwaysTrue() <------------------
+	Her zaman True şartını döner.
 	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> and(ICondition<? super T> c1, ICondition<? super T> c2) <------------------
+	Verilen her iki şart doğru ise true döner.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> and2(ICondition<? super T> c1, ICondition<? super T> c2) <------------------
+	Verilen her iki şart doğru ise true döner.
+	
+	*********************************************************************************************
+	
+	------------------> public static ICondition<Class<?>> assignableTo(final Class<?> clazz) <------------------
+	Verilen değer ve belirlenen value değeri ile atanabilir olup olmadığını kontrol eder.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> cached(ICondition<? super T> c) <------------------
+	Verilen her koşulu cacheler ve istenidiği zaman çağrır kullanır.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> constant(boolean value) <------------------
+	Sabit tanımlı olan boolean değerlerini döner.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> Condition<T> equalTo(final Object option) <------------------
+	Verilen object değerini belirlenen value ile eşitlik kontrolü yapar.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> instanceOf(final Class<?> clazz) <------------------
+	Verilen sınıf tipinde bir instance olup olmadığını döner.
+	
+	------------------> public static <T> ICondition<T> instanceOf(Class<?>... clazz) <------------------
+	Verilen sınıf tipinde bir array instance olup olmadığını döner.
+	
+	*********************************************************************************************
+	
+	------------------> public static <T> ICondition<T> is(T option) <------------------
+	Verilen object değerini belirlenen value ile eşitlik kontrolü yapar.
 	
 	
 	
@@ -95,9 +188,7 @@ public class Console
 				import com.intellij.openapi.util.text.StringUtil;
 				import com.intellij.util.concurrency.AppExecutorUtil;
 				import com.intellij.util.containers.ContainerUtil;
-					import com.intellij.openapi.Disposable;
-					import com.intellij.openapi.util.Condition;
-					import com.intellij.openapi.util.Conditions;
+					import com.intellij.openapi.util.Conditions;			--> Sıra Bunda
 					import com.intellij.openapi.util.Couple;
 					import com.intellij.openapi.util.Disposer;
 					import com.intellij.util.DeprecatedMethodException;
@@ -110,7 +201,7 @@ public class Console
 		
 		// boolean, byte, int, long, char, short, float, double
 		
-		
+		// SoftReference bununla ilgili örnekler yapılıcak
 		
 		// try{Thread.sleep(10000);}catch(Exception e){}
 

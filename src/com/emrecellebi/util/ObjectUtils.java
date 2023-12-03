@@ -119,8 +119,6 @@ public final class ObjectUtils
 		return (obj != defaultValue) ? obj : null;
 	}
 	
-	// public static void reachabilityFence(Object o){}
-	
 	public static Object sentinel(String name)
 	{
 		return new Sentinel(name);
