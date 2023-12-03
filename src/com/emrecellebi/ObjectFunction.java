@@ -2,6 +2,8 @@ package com.emrecellebi;
 
 import java.util.Collection;
 
+import com.emrecellebi.util.IFunction;
+
 public class ObjectFunction implements IFunction<Object, Object>
 {
 	@Override

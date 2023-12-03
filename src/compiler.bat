@@ -8,6 +8,7 @@ set TROVE_LIB=../lib/trove4j-3.0.3.jar;
 set CLASS_LIB=%TROVE_LIB%
 set CLASS_PATH=-d ../bin -cp %CLASS_LIB%
 
+rmdir /s /q ..\bin\com
 REM %JVM_PATH%\javac.exe %CLASS_PATH% com/emrecellebi/Console.java
 REM %JVM_PATH2%\javac.exe %CLASS_PATH% com/emrecellebi/Console.java
 javac.exe %CLASS_PATH% com/emrecellebi/Console.java

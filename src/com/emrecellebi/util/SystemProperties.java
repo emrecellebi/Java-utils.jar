@@ -1,5 +1,7 @@
 package com.emrecellebi.util;
 
+import com.emrecellebi.openapi.util.SystemInfo;
+
 public final class SystemProperties
 {
 	public static boolean getBooleanProperty(String key, boolean defaultValue)

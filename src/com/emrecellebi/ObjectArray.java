@@ -1,5 +1,7 @@
 package com.emrecellebi;
 
+import com.emrecellebi.util.IArrayFactory;
+
 public class ObjectArray implements IArrayFactory<Object>
 {
 	@Override
